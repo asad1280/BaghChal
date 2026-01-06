@@ -7,7 +7,8 @@
     --accent-red: #ef4444;
     --text-main: #f8fafc;
     --text-muted: #94a3b8;
-    --line-color: #fbbf24; /* Amber 400 */
+    --line-color: #fbbf24;
+    /* Amber 400 */
 }
 
 body {
@@ -16,7 +17,7 @@ body {
     font-family: 'Outfit', sans-serif;
     background-color: var(--bg-dark);
     color: var(--text-main);
-    background-image: 
+    background-image:
         radial-gradient(at 0% 0%, rgba(249, 115, 22, 0.15) 0px, transparent 50%),
         radial-gradient(at 100% 100%, rgba(148, 163, 184, 0.1) 0px, transparent 50%);
     min-height: 100vh;
@@ -40,6 +41,7 @@ h1 {
     font-size: 3rem;
     margin: 0;
     background: linear-gradient(to right, #fbbf24, #f97316);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-transform: uppercase;
@@ -68,7 +70,7 @@ h1 {
     border-radius: 20px;
     padding: 2rem;
     width: 300px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 .status-card {
@@ -112,7 +114,7 @@ h1 {
     display: flex;
     justify-content: space-between;
     padding: 0.75rem;
-    background: rgba(0,0,0,0.2);
+    background: rgba(0, 0, 0, 0.2);
     border-radius: 10px;
 }
 
@@ -132,16 +134,18 @@ h1 {
 
 /* --- Board --- */
 .board-container {
-    padding: 2px; /* Rim */
-    background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
+    padding: 2px;
+    /* Rim */
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
     border-radius: 24px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
 }
 
 .board-wrapper {
     position: relative;
-    width: 500px;
-    height: 500px;
+    width: 100%;
+    max-width: 500px;
+    aspect-ratio: 1 / 1;
     background: #1e293b;
     border-radius: 22px;
     overflow: hidden;
@@ -156,7 +160,9 @@ h1 {
     pointer-events: none;
 }
 
-.line-border, .line-grid, .line-diag {
+.line-border,
+.line-grid,
+.line-diag {
     stroke: var(--line-color);
     stroke-width: 2;
     stroke-opacity: 0.3;
@@ -199,8 +205,10 @@ h1 {
 
 /* Pieces */
 .piece {
-    width: 40px;
-    height: 40px;
+    width: 60%;
+    height: 60%;
+    max-width: 45px;
+    max-height: 45px;
     border-radius: 50%;
     position: relative;
     z-index: 2;
@@ -208,8 +216,8 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.2rem;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    font-size: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
 .piece.tiger {
@@ -235,9 +243,19 @@ h1 {
 
 /* Just placed/moved animation */
 @keyframes popIn {
-    0% { transform: scale(0); opacity: 0; }
-    80% { transform: scale(1.2); opacity: 1; }
-    100% { transform: scale(1); }
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    80% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
 
 .piece.animate-enter {
@@ -296,17 +314,27 @@ h1 {
 }
 
 @keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.4); }
-    70% { box-shadow: 0 0 0 10px rgba(251, 191, 36, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0); }
+    0% {
+        box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.4);
+    }
+
+    70% {
+        box-shadow: 0 0 0 10px rgba(251, 191, 36, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(251, 191, 36, 0);
+    }
 }
 
 /* Modal */
 .modal {
     position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0,0,0,0.8);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -323,12 +351,54 @@ h1 {
     padding: 3rem;
     border-radius: 24px;
     text-align: center;
-    border: 1px solid rgba(255,255,255,0.1);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
 }
 
 .modal-content h2 {
     font-size: 2.5rem;
     margin-top: 0;
     color: var(--primary-gold);
+}
+
+
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .app-container {
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .game-layout {
+        gap: 2rem;
+        flex-direction: column-reverse;
+        /* Controls below board on mobile potentially better? Or stick to wrap */
+    }
+
+    /* Ensure board fits within the screen minus padding */
+    .board-wrapper {
+        width: 100%;
+        max-width: 500px;
+        height: auto;
+        aspect-ratio: 1 / 1;
+    }
+
+    .panel {
+        width: 100%;
+        /* Full width panel on mobile */
+        max-width: 400px;
+    }
+}
+
+@media (max-width: 480px) {
+    .board-wrapper {
+        max-width: 100%;
+        /* Fully flexible on very small screens */
+    }
+
+    /* Adjust SVG lines if needed, usually SVG scales well */
 }
