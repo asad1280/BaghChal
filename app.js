@@ -1,4 +1,6 @@
-import { BaghChalGame, AI, EMPTY, TIGER, GOAT } from './bagh_chal_ai.js';
+// Imports removed for global scope compatibility on Android WebView (file://)
+// Assumes bagh_chal_ai.js is loaded before this script
+
 
 class GameController {
     constructor() {
