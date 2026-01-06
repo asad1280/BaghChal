@@ -549,5 +549,16 @@ function printBoard(board) {
     }
 }
 
-// Export for ES Modules (Browser)
-export { BaghChalGame, AI, EMPTY, TIGER, GOAT };
+// Export for ES Modules (Browser) or Global
+if (typeof window !== 'undefined') {
+    window.BaghChalGame = BaghChalGame;
+    window.AI = AI;
+    window.EMPTY = EMPTY;
+    window.TIGER = TIGER;
+    window.GOAT = GOAT;
+} else if (typeof module !== 'undefined' && module.exports) {
+    // Node.js
+    module.exports = { BaghChalGame, AI, EMPTY, TIGER, GOAT };
+} else {
+    // Other environments (workers etc) just rely on scope
+}
